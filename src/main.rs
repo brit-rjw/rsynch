@@ -3,12 +3,16 @@ mod helpers;
 mod remove_extras;
 mod create_dirs;
 mod copy_files;
+mod get_args;
+
+use crate::get_args::{get_paths};
 
 fn main() {
-    let source_path: &str = "/Users/robertwoodward/Downloads/RSyncTestDirs";
-    let target_path: &str = "/Users/robertwoodward/Downloads/RSyncTestDirs1";
+    let args = get_paths();
+    let src_path = args.source_dir_path.as_str();
+    let tgt_path = args.target_dir_path.as_str();
 
-    remove_extras::remove_extra_dirs_and_files(target_path, source_path);
-    create_dirs::create_missing_dirs(source_path, target_path);
-    copy_files::copy_files(source_path, target_path)
+    remove_extras::remove_extra_dirs_and_files(tgt_path, src_path);
+    create_dirs::create_missing_dirs(src_path, tgt_path);
+    copy_files::copy_files(src_path, tgt_path)
 }
